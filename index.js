@@ -2,18 +2,27 @@ import inquirer from "inquirer";
 const prompt = await inquirer.prompt([
     {
         name: "para",
-        message: "enter para",
+        message: "Enter you sentence do you count word.",
         type: "string",
-        // validate: (para) => {
-        //    if(para == "  "){
-        //     console.log("space is not allow");
-        //    }
-        // }
     }
 ]);
-let trimid = prompt.para.trim();
-let logic = trimid.split(" ");
-console.log(logic);
-logic.forEach((word, i) => {
-    console.log(`[${i + 1}] ${word}`);
-});
+console.log(prompt.para);
+const options = await inquirer.prompt([
+    {
+        name: "count",
+        message: "Do you count the words in this sentence",
+        type: "confirm",
+        default: "yes"
+    }
+]);
+let condition = true;
+while (condition) {
+    switch (options.count) {
+        case true:
+            let trimid = prompt.para.trim();
+            let logic = trimid.split(" ");
+            console.log(logic);
+        case false:
+            condition = !condition;
+    }
+}
