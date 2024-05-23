@@ -1,13 +1,27 @@
-
+#! /usr/bin/env node
 
 import inquirer from "inquirer";
 import chalk from "chalk"
+import showBanner from "node-banner"
 
 
 let red = chalk.red.italic
 let blue = chalk.blue.italic
 let green = chalk.green.italic
 let yellow = chalk.yellow.italic
+
+
+async function ShowAppName() {
+    await showBanner('Word Counter', 'This App Made by Adil Malik 😊💕 \n');
+}
+await ShowAppName()
+
+
+
+
+
+
+
 
 const prompt = await inquirer.prompt([
     {
