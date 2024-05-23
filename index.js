@@ -1,28 +1,66 @@
 import inquirer from "inquirer";
+import chalk from "chalk";
+let red = chalk.red.italic;
+let blue = chalk.blue.italic;
+let green = chalk.green.italic;
+let yellow = chalk.yellow.italic;
 const prompt = await inquirer.prompt([
     {
         name: "para",
-        message: "Enter you sentence do you count word.",
-        type: "string",
+        message: yellow("Please enter your paragraph:"),
+        type: "input",
+        validate(para) {
+            if (para.trim() === "") {
+                return red("Paragraph cannot be empty.");
+            }
+            return true;
+        }
     }
 ]);
-console.log(prompt.para);
+prompt.para = prompt.para.trim().replace(/\s+/g, ' ');
+console.log(blue(`\n${prompt.para}\n`));
 const options = await inquirer.prompt([
     {
         name: "count",
-        message: "Do you count the words in this sentence",
+        message: yellow("Do you wanna count the words in this paragraph ?"),
         type: "confirm",
-        default: "yes"
+        default: "yes",
     }
 ]);
 let condition = true;
 while (condition) {
     switch (options.count) {
         case true:
-            let trimid = prompt.para.trim();
-            let logic = trimid.split(" ");
+            let logic = prompt.para.split(" ");
             console.log(logic);
-        case false:
+            await listSequence(logic);
             condition = !condition;
+            break;
+        case false:
+            console.log(blue("This for using this app ! 😊"));
+            condition = !condition;
+            break;
+        default:
+            console.log(chalk.red('Invalid command!'));
+            break;
+    }
+}
+async function listSequence(logic) {
+    const byLine = await inquirer.prompt([
+        {
+            name: "check",
+            message: yellow("Do you wanna convert this words in sequence ?"),
+            type: "confirm",
+            default: "yes"
+        }
+    ]);
+    if (byLine.check == true) {
+        logic.forEach((word, i) => {
+            console.log(`[${i + 1}]${word}`);
+        });
+        return;
+    }
+    else {
+        console.log(blue("This for using this app ! 😊"));
     }
 }
