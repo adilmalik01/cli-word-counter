@@ -1,6 +1,6 @@
 {
-  "name": "adil-word-counter",
-  "version": "1.0.0",
+  "name": "adil-cli-word-counter",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "type": "module",
@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "chalk": "^5.3.0",
+    "inquirer": "^9.1.2",
     "node-banner": "^1.4.0"
   }
 }
